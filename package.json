@@ -1,0 +1,10 @@
+{
+  "name": "unjigi-mvp",
+  "version": "0.0.1",
+  "private": true,
+  "description": "운지기 MVP 모노레포",
+  "scripts": {
+    "dev:frontend": "pnpm --filter frontend dev",
+    "build:frontend": "pnpm --filter frontend build"
+  }
+}

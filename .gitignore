@@ -141,3 +141,39 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# === 운지기 추가 (Python·OS·IDE) ===
+
+# Python
+backend/.venv/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+
+# Python local data·models (개발 중 임시)
+backend/app/data/*.csv
+backend/app/data/*.zip
+backend/app/models/*.pt
+backend/app/models/*.pkl
+# 단 mock_demo.json·lounges.json은 커밋 OK (용량 작음)
+!backend/app/data/mock_demo.json
+!backend/app/data/lounges.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+
+# 빌드·배포
+frontend/dist/
+backend/dist/

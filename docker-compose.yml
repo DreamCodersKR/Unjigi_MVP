@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: unjigi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: unjigi
+      POSTGRES_PASSWORD: unjigi_local_pw
+      POSTGRES_DB: unjigi_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - unjigi_pg_data:/var/lib/postgresql/data
+      - ./backend/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  unjigi_pg_data:

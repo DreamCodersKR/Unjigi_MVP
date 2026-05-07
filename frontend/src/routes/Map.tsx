@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useLounges } from "@/hooks/useLounges";
 
 declare global {
   interface Window {
@@ -9,6 +11,7 @@ declare global {
 export default function Map() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);  //네이버 지도 SDK 로드 완료 여부
+  const { isLoading, error, refetch } = useLounges();
 
   //네이버 지도 SDK script 로드
   useEffect(() => {
@@ -48,9 +51,28 @@ export default function Map() {
   }, [loaded]);
 
   return (
-    <div 
-      ref={mapRef} 
-      className="w-full h-screen" 
+  <div className="relative w-full h-screen">
+    {isLoading && <div>라운지 로딩중...</div>}
+    {error && <div>라운지 에러 발생: {error.message}</div>}
+
+    <Link
+      to="/"
+      className="absolute top-4 left-4 z-10 bg-white p-2 border"
+    >
+      홈으로 돌아가기
+    </Link>
+    
+    <button
+      onClick={() => refetch()}
+      className="absolute top-16 left-4 z-10 bg-white p-2 border"
+    >
+      라운지 불러오기
+    </button>
+
+    <div
+      ref={mapRef}
+      className="w-full h-screen"
     />
+  </div>
   );
 }

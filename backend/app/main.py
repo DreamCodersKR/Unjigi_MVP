@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.lounges import router as lounges_router
 
 app = FastAPI(title="운지기 API", version="0.0.1")
 
@@ -16,3 +17,5 @@ app.add_middleware(
 @app.get("/health")
 def health():
     return {"status": "ok", "service": "unjigi-backend"}
+
+app.include_router(lounges_router)

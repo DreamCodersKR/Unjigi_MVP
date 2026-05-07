@@ -1,3 +1,5 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export interface Lounge {
   id: number;
   name: string;
@@ -6,7 +8,7 @@ export interface Lounge {
 }
 
 export async function getLounges(): Promise<Lounge[]> {
-  const response = await fetch("/api/lounges");
+  const response = await fetch(`${API_BASE_URL}/api/lounges`);
 
   if (!response.ok) {
     throw new Error("라운지 목록 조회 실패");

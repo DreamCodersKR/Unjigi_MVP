@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLounges } from "@/hooks/useLounges";
+import type { Lounge } from "@/api/lounges";
 
 declare global {
   interface Window {
@@ -11,7 +12,10 @@ declare global {
 export default function Map() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);  //네이버 지도 SDK 로드 완료 여부
-  const { isLoading, error, refetch } = useLounges();
+  const [map, setMap] = useState<any>(null);
+  const markersRef = useRef<any[]>([]);
+  const infoWindowRef = useRef<any>(null);
+  const { data: lounges = [], isLoading, error, refetch } = useLounges();
 
   //네이버 지도 SDK script 로드
   useEffect(() => {
@@ -39,16 +43,84 @@ export default function Map() {
   useEffect(() => {
     if (!loaded || !mapRef.current) return;
 
-    const map = new window.naver.maps.Map(mapRef.current, {
+    const mapInstance  = new window.naver.maps.Map(mapRef.current, {
       center: new window.naver.maps.LatLng(35.18, 129.07),
       zoom: 12,
     });
 
-    new window.naver.maps.Marker({
-      position: new window.naver.maps.LatLng(35.18, 129.07),
-      map,
-    });
+    setMap(mapInstance);
+    if (!infoWindowRef.current) {
+      infoWindowRef.current = new window.naver.maps.InfoWindow();
+    }
+
   }, [loaded]);
+
+  useEffect(() => {
+    if (!map) return;
+    if (!window.naver) return;
+
+    removeMarkers();
+
+    const bounds = new window.naver.maps.LatLngBounds();
+    
+
+    lounges.forEach((lounge) => {
+      const position = new window.naver.maps.LatLng(lounge.lat, lounge.lng);
+
+      const marker = new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(lounge.lat, lounge.lng),
+        map,
+        icon: {
+          content: `
+            <div
+              style="
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: ${lounge.type === "lounge" ? "#1A56DB" : "#FF6B35"};
+                border: 2px solid white;
+                box-shadow: 0 0 4px rgba(0,0,0,0.3);
+              "
+            ></div>
+          `,
+        },
+      });
+      window.naver.maps.Event.addListener(marker, "click", () => {
+        infoWindowRef.current?.setContent(createInfoWindowContent(lounge));
+        infoWindowRef.current?.open(map, marker);
+      });
+      markersRef.current.push(marker);
+      bounds.extend(position);
+    });
+
+    requestAnimationFrame(() => {
+      map.fitBounds(bounds);
+    });
+  }, [map, lounges]);
+
+  const removeMarkers = () => {
+    markersRef.current.forEach((marker) => {
+      marker.setMap(null);
+    });
+    markersRef.current = [];  
+  };
+
+  function createInfoWindowContent(lounge: Lounge) {
+    return `
+      <div style="padding: 12px; min-width: 140px; font-size: 14px;">
+        <strong>${lounge.name}</strong>
+        <div>${lounge.sido ?? ""} ${lounge.sigungu ?? ""}</div>
+        <div style="margin-top: 6px;">
+          <strong>[${lounge.type === "lounge" ? "화물차 라운지" : "졸음쉼터"}]</strong>
+        </div>
+        <div>샤워실: ${lounge.facility_shower ? '<strong>O</strong>':'X'}</div>
+        <div>수면실: ${lounge.facility_sleep_room ? '<strong>O</strong>':'X'}</div>
+        <div>세탁실: ${lounge.facility_laundry ? '<strong>O</strong>':'X'}</div>
+        <div>음식점: ${lounge.facility_restaurant ? '<strong>O</strong>':'X'}</div>
+        <div>좌석수: ${lounge.total_seats}</div>
+      </div>
+      `;
+  }
 
   return (
   <div className="relative w-full h-screen">

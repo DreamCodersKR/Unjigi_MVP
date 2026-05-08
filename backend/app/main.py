@@ -8,6 +8,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "https://unjigi-mvp-git-test-yoons-projects-77b5c785.vercel.app/",
         "https://unjigi-mvp.vercel.app",
     ],
     allow_methods=["*"],

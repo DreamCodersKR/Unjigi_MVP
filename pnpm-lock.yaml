@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      '@types/navermaps':
+        specifier: ^3.9.1
+        version: 3.9.1
 
   frontend:
     dependencies:

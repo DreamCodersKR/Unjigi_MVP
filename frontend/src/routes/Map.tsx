@@ -55,9 +55,12 @@ export default function Map() {
 
   }, [loaded]);
 
+  //마커 생성
   useEffect(() => {
     if (!map) return;
     if (!window.naver) return;
+    if (isLoading) return;
+    if (lounges.length === 0) return;
 
     removeMarkers();
 
@@ -68,7 +71,7 @@ export default function Map() {
       const position = new window.naver.maps.LatLng(lounge.lat, lounge.lng);
 
       const marker = new window.naver.maps.Marker({
-        position: new window.naver.maps.LatLng(lounge.lat, lounge.lng),
+        position: position,
         map,
         icon: {
           content: `

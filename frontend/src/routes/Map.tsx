@@ -9,6 +9,16 @@ declare global {
   }
 }
 
+type Center = {
+  lat: number;
+  lng: number;
+};
+
+const DEFAULT_CENTER: Center = {
+  lat: 35.18,
+  lng: 129.07,
+};
+
 export default function Map() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);  //네이버 지도 SDK 로드 완료 여부
@@ -16,6 +26,7 @@ export default function Map() {
   const markersRef = useRef<any[]>([]);
   const infoWindowRef = useRef<any>(null);
   const { data: lounges = [], isLoading, error, refetch } = useLounges();
+  const [center, setCenter] = useState<Center>(DEFAULT_CENTER);
 
   //네이버 지도 SDK script 로드
   useEffect(() => {
@@ -44,7 +55,7 @@ export default function Map() {
     if (!loaded || !mapRef.current) return;
 
     const mapInstance  = new window.naver.maps.Map(mapRef.current, {
-      center: new window.naver.maps.LatLng(35.18, 129.07),
+      center: new window.naver.maps.LatLng(center.lat,center.lng),
       zoom: 12,
     });
 

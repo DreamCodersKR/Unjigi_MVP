@@ -5,6 +5,6 @@ export function useLounges() {
   return useQuery({
     queryKey: ["lounges"],
     queryFn: getLounges,
-    enabled: false,
+    enabled: true,
   });
 }

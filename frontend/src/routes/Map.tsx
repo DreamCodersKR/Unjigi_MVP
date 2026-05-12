@@ -26,7 +26,7 @@ export default function Map() {
   const markersRef = useRef<any[]>([]);
   const infoWindowRef = useRef<any>(null);
   const { data: lounges = [], isLoading, error, refetch } = useLounges();
-  const [center, setCenter] = useState<Center>(DEFAULT_CENTER);
+  const [center] = useState<Center>(DEFAULT_CENTER);
 
   //네이버 지도 SDK script 로드
   useEffect(() => {

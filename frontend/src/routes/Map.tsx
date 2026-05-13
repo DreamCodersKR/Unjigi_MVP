@@ -5,7 +5,7 @@ import type { Lounge } from "@/api/lounges";
 
 declare global {
   interface Window {
-    naver: any;
+    naver: typeof naver;
   }
 }
 
@@ -22,9 +22,9 @@ const DEFAULT_CENTER: Center = {
 export default function Map() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);  //네이버 지도 SDK 로드 완료 여부
-  const [map, setMap] = useState<any>(null);
-  const markersRef = useRef<any[]>([]);
-  const infoWindowRef = useRef<any>(null);
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const markersRef = useRef<naver.maps.Marker[]>([]);
+  const infoWindowRef = useRef<naver.maps.InfoWindow | null>(null);
   const { data: lounges = [], isLoading, error, refetch } = useLounges();
   const [center] = useState<Center>(DEFAULT_CENTER);
 
@@ -61,7 +61,7 @@ export default function Map() {
 
     setMap(mapInstance);
     if (!infoWindowRef.current) {
-      infoWindowRef.current = new window.naver.maps.InfoWindow();
+      infoWindowRef.current = new naver.maps.InfoWindow({content: ""}); //타입 정의상 options 객체 필요
     }
 
   }, [loaded]);
@@ -75,7 +75,10 @@ export default function Map() {
 
     removeMarkers();
 
-    const bounds = new window.naver.maps.LatLngBounds();
+    const bounds = new naver.maps.LatLngBounds(  //타입 정의상 초기값 필요
+      new naver.maps.LatLng(0, 0),
+      new naver.maps.LatLng(0, 0)
+    );
     
 
     lounges.forEach((lounge) => {

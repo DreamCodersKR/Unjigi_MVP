@@ -1,0 +1,69 @@
+{
+  "score": 47,
+  "level": "L2",
+  "updated_at": "2026-05-15T22:00:00Z",
+  "trip_started_at": "2026-05-15T20:30:00Z",
+
+  "history": [
+    { "timestamp": 1715630400, "score": 12 },
+    { "timestamp": 1715630460, "score": 15 },
+    { "timestamp": 1715630520, "score": 18 },
+    { "timestamp": 1715630580, "score": 22 },
+    { "timestamp": 1715630640, "score": 25 },
+    { "timestamp": 1715630700, "score": 28 },
+    { "timestamp": 1715630760, "score": 30 },
+    { "timestamp": 1715630820, "score": 32 },
+    { "timestamp": 1715630880, "score": 33 },
+    { "timestamp": 1715630940, "score": 35 },
+    { "timestamp": 1715631000, "score": 36 },
+    { "timestamp": 1715631060, "score": 37 },
+    { "timestamp": 1715631120, "score": 38 },
+    { "timestamp": 1715631180, "score": 39 },
+    { "timestamp": 1715631240, "score": 40 },
+    { "timestamp": 1715631300, "score": 41 },
+    { "timestamp": 1715631360, "score": 42 },
+    { "timestamp": 1715631420, "score": 43 },
+    { "timestamp": 1715631480, "score": 43 },
+    { "timestamp": 1715631540, "score": 44 },
+    { "timestamp": 1715631600, "score": 44 },
+    { "timestamp": 1715631660, "score": 45 },
+    { "timestamp": 1715631720, "score": 45 },
+    { "timestamp": 1715631780, "score": 46 },
+    { "timestamp": 1715631840, "score": 46 },
+    { "timestamp": 1715631900, "score": 46 },
+    { "timestamp": 1715631960, "score": 47 },
+    { "timestamp": 1715632020, "score": 47 },
+    { "timestamp": 1715632080, "score": 47 },
+    { "timestamp": 1715632200, "score": 47 }
+  ],
+
+  "breakdown": {
+    "rule_based": 47,
+    "lstm_based": 0,
+    "weight_rule": 1.0,
+    "weight_lstm": 0.0,
+    "model_status": "rule_only"
+  },
+
+  "factors": [
+    {
+      "type": "long_drive",
+      "severity": "medium",
+      "message": "90분 연속 운행 중이에요"
+    },
+    {
+      "type": "night_time",
+      "severity": "low",
+      "message": "야간 운행 (시정 양호)"
+    }
+  ],
+
+  "recommended_action": {
+    "type": "rest",
+    "nearest_lounge_id": "rest_seomyeon_01",
+    "nearest_lounge_distance_km": 12.0
+  },
+
+  "data_source": "phone_only",
+  "data_quality": "limited"
+}

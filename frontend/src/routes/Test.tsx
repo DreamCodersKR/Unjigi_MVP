@@ -1,4 +1,6 @@
-import { RiskGauge } from "@/components/ui/riskGauge";
+import { RiskGauge } from "@/components/ui/RiskGauge";
+import { RiskSparkline } from "@/components/ui/RiskSparkline";
+import mock_risk from '@/mocks/mock_risk.json';
 
 export default function Test() {
 
@@ -10,6 +12,7 @@ export default function Test() {
       <RiskGauge score={47} level="L2" />
       <RiskGauge score={75} level="L3" />
       <RiskGauge score={92} level="L4" />
+      <RiskSparkline data={mock_risk?.history}/>
     </div>
 
   </div>

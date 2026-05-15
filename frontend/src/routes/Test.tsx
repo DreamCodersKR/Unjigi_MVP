@@ -1,5 +1,5 @@
-import { RiskGauge } from "@/components/ui/RiskGauge";
-import { RiskSparkline } from "@/components/ui/RiskSparkline";
+import { RiskGauge } from "@/components/RiskGauge";
+import { RiskSparkline } from "@/components/RiskSparkline";
 import mock_risk from '@/mocks/mock_risk.json';
 
 export default function Test() {

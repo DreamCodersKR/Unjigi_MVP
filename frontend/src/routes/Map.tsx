@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLounges } from "@/hooks/useLounges";
-import type { Lounge } from "@/api/lounges";
+import type { Lounge } from "@/types/lounges";
 
 declare global {
   interface Window {

@@ -1,19 +1,6 @@
+import type { Lounge } from "@/types/lounges";
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-export type Lounge = {
-  id: string; 
-  name: string; 
-  type: 'lounge' | 'rest_area';
-  lat: number; lng: number;
-  facility_shower: boolean; 
-  facility_sleep_room: boolean;
-  facility_laundry: boolean; 
-  facility_restaurant: boolean;
-  total_seats: number;
-  sido: string | null; 
-  sigungu: string | null;
-};
-
 
 export async function getLounges(): Promise<Lounge[]> {
   const response = await fetch(`${API_BASE_URL}api/lounges`);

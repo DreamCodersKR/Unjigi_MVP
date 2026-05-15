@@ -1,5 +1,5 @@
-import { RiskGauge } from "@/components/ui/RiskGauge";
-import { RiskSparkline } from "@/components/ui/RiskSparkline";
+import { RiskGauge } from "@/components/RiskGauge";
+import { RiskSparkline } from "@/components/RiskSparkline";
 import { useRisk } from '@/hooks/useRisk';
 
 export default function Risk() {

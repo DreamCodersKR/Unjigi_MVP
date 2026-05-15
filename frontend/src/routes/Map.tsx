@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLounges } from "@/hooks/useLounges";
 import type { Lounge, Coord } from "@/types/geo";
+import  { DEFAULT_Coord, findNearestLounge } from "@/utils/geo";
 
 declare global {
   interface Window {
@@ -9,19 +10,22 @@ declare global {
   }
 }
 
-const DEFAULT_Coord: Coord = {
-  lat: 35.18,
-  lng: 129.07,
-};
-
-export default function Map() {
+export default function MapPage() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);  //네이버 지도 SDK 로드 완료 여부
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const markersRef = useRef<naver.maps.Marker[]>([]);
   const infoWindowRef = useRef<naver.maps.InfoWindow | null>(null);
   const { data: lounges = [], isLoading, error, refetch } = useLounges();
-  const [center] = useState<Coord>(DEFAULT_Coord);
+  const [currentLoc] = useState<Coord>(DEFAULT_Coord);
+  const markerByIdRef = useRef<Map<string, naver.maps.Marker>>(new Map<string, naver.maps.Marker>());
+
+  const nearestLounge = useMemo(() => {
+    if (!currentLoc) return null;
+    if (lounges.length === 0) return null;
+
+    return findNearestLounge(currentLoc, lounges);
+  }, [currentLoc, lounges]);
 
   //네이버 지도 SDK script 로드
   useEffect(() => {
@@ -50,7 +54,7 @@ export default function Map() {
     if (!loaded || !mapRef.current) return;
 
     const mapInstance  = new window.naver.maps.Map(mapRef.current, {
-      center: new window.naver.maps.LatLng(center.lat,center.lng),
+      center: new window.naver.maps.LatLng(currentLoc.lat,currentLoc.lng),
       zoom: 12,
     });
 
@@ -98,9 +102,9 @@ export default function Map() {
         },
       });
       window.naver.maps.Event.addListener(marker, "click", () => {
-        infoWindowRef.current?.setContent(createInfoWindowContent(lounge));
-        infoWindowRef.current?.open(map, marker);
+        openLoungeInfoWindow(lounge, marker);
       });
+      markerByIdRef.current.set(lounge.id, marker);
       markersRef.current.push(marker);
       bounds.extend(position);
     });
@@ -109,6 +113,26 @@ export default function Map() {
       map.fitBounds(bounds);
     });
   }, [map, lounges]);
+
+  useEffect(() => {
+    if (!map) return;
+    if (!nearestLounge) return;
+
+    const marker = markerByIdRef.current.get(nearestLounge.id);
+
+    if (!marker) return;
+    openLoungeInfoWindow(nearestLounge, marker);
+  }, [map, nearestLounge]);
+
+
+  const openLoungeInfoWindow = (
+    lounge: Lounge,
+    marker: naver.maps.Marker
+  ) => {
+    if (!map) return;
+    infoWindowRef.current?.setContent(createInfoWindowContent(lounge));
+    infoWindowRef.current?.open(map, marker);
+  };
 
   const removeMarkers = () => {
     markersRef.current.forEach((marker) => {

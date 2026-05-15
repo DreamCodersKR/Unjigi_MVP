@@ -1,5 +1,6 @@
 import { RiskGauge } from "@/components/RiskGauge";
 import { RiskSparkline } from "@/components/RiskSparkline";
+import { NearbyLoungeButton } from "@/components/NearbyLoungeButton";
 import { useRisk } from '@/hooks/useRisk';
 
 export default function Risk() {
@@ -20,7 +21,7 @@ export default function Risk() {
         <RiskSparkline data={data.history} />
       </div>
  
-      {/* NearbyLoungeButton 자리 — W2-5 에서 추가 */}
+      <NearbyLoungeButton distance={12}/>
     </div>
   );
 

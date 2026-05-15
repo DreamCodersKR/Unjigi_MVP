@@ -11,3 +11,8 @@ export type Lounge = {
   sido: string | null; 
   sigungu: string | null;
 };
+
+export type Coord = {
+  lat: number;
+  lng: number;
+};

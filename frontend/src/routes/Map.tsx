@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLounges } from "@/hooks/useLounges";
-import type { Lounge } from "@/types/lounges";
+import type { Lounge, Coord } from "@/types/geo";
 
 declare global {
   interface Window {
@@ -9,12 +9,7 @@ declare global {
   }
 }
 
-type Center = {
-  lat: number;
-  lng: number;
-};
-
-const DEFAULT_CENTER: Center = {
+const DEFAULT_Coord: Coord = {
   lat: 35.18,
   lng: 129.07,
 };
@@ -26,7 +21,7 @@ export default function Map() {
   const markersRef = useRef<naver.maps.Marker[]>([]);
   const infoWindowRef = useRef<naver.maps.InfoWindow | null>(null);
   const { data: lounges = [], isLoading, error, refetch } = useLounges();
-  const [center] = useState<Center>(DEFAULT_CENTER);
+  const [center] = useState<Coord>(DEFAULT_Coord);
 
   //네이버 지도 SDK script 로드
   useEffect(() => {

@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { dbping } from "@/api/lounges";
 
 export default function Home() {
+  useEffect(() => {
+    dbping();
+  }, []);
+
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <div className="flex flex-col items-center gap-2">

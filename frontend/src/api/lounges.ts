@@ -11,3 +11,13 @@ export async function getLounges(): Promise<Lounge[]> {
 
   return response.json();
 }
+
+export async function dbping(): Promise<[]> {
+  const response = await fetch(`${API_BASE_URL}dbping`);
+
+  if (!response.ok) {
+    throw new Error("dbping 실패");
+  }
+
+  return response.json();
+}

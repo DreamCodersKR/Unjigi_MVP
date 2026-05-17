@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useLounges, useLoungeNearest } from "@/hooks/useLounges";
+import { useEffect, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { useLounges, useLoungeNearest, useLoungesCircle } from "@/hooks/useLounges";
 import type { Lounge, Coord } from "@/types/geo";
-import  { DEFAULT_Coord, findNearestLounge } from "@/utils/geo";
+import  { DEFAULT_Coord} from "@/utils/geo";
 
 declare global {
   interface Window {
@@ -11,23 +11,29 @@ declare global {
 }
 
 export default function MapPage() {
+  const [searchParams] = useSearchParams();
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);  //네이버 지도 SDK 로드 완료 여부
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const markersRef = useRef<naver.maps.Marker[]>([]);
   const infoWindowRef = useRef<naver.maps.InfoWindow | null>(null);
-  const { data: lounges = [], isLoading, error, refetch } = useLounges();
-  const loungeNearest = useLoungeNearest(DEFAULT_Coord.lat, DEFAULT_Coord.lng);
+  const { data: lounges = [], isLoading, error, refetch } = 
+    searchParams.get('focus') === 'nearest' 
+    ? useLoungeNearest(DEFAULT_Coord.lat, DEFAULT_Coord.lng) 
+    : useLounges();
+  //const loungeNearest = useLoungeNearest(DEFAULT_Coord.lat, DEFAULT_Coord.lng);
+  const loungesCircle = useLoungesCircle(DEFAULT_Coord.lat, DEFAULT_Coord.lng, 30);
   const [currentLoc] = useState<Coord>(DEFAULT_Coord);
   const markerByIdRef = useRef<Map<string, naver.maps.Marker>>(new Map<string, naver.maps.Marker>());
-  console.log('loungeNearest',loungeNearest);
-  
-  const nearestLounge = useMemo(() => {
-    if (!currentLoc) return null;
-    if (lounges.length === 0) return null;
+   
+  console.log('loungeCircle',loungesCircle);
+  console.log('searchParams',searchParams.get('focus') === 'nearest');
+  // const nearestLounge = useMemo(() => {
+  //   if (!currentLoc) return null;
+  //   if (lounges.length === 0) return null;
 
-    return findNearestLounge(currentLoc, lounges);
-  }, [currentLoc, lounges]);
+  //   return findNearestLounge(currentLoc, lounges);
+  // }, [currentLoc, lounges]);
 
   //네이버 지도 SDK script 로드
   useEffect(() => {
@@ -118,13 +124,13 @@ export default function MapPage() {
 
   useEffect(() => {
     if (!map) return;
-    if (!nearestLounge) return;
+    if (lounges.length != 1) return;
 
-    const marker = markerByIdRef.current.get(nearestLounge.id);
+    const marker = markerByIdRef.current.get(lounges[0].id);
 
     if (!marker) return;
-    openLoungeInfoWindow(nearestLounge, marker);
-  }, [map, nearestLounge]);
+    openLoungeInfoWindow(lounges[0], marker);
+  }, [map, lounges]);
 
 
   const openLoungeInfoWindow = (

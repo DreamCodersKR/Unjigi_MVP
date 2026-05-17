@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { useLounges } from "@/hooks/useLounges";
+import { useLounges, useLoungeNearest } from "@/hooks/useLounges";
 import type { Lounge, Coord } from "@/types/geo";
 import  { DEFAULT_Coord, findNearestLounge } from "@/utils/geo";
 
@@ -17,9 +17,11 @@ export default function MapPage() {
   const markersRef = useRef<naver.maps.Marker[]>([]);
   const infoWindowRef = useRef<naver.maps.InfoWindow | null>(null);
   const { data: lounges = [], isLoading, error, refetch } = useLounges();
+  const loungeNearest = useLoungeNearest(DEFAULT_Coord.lat, DEFAULT_Coord.lng);
   const [currentLoc] = useState<Coord>(DEFAULT_Coord);
   const markerByIdRef = useRef<Map<string, naver.maps.Marker>>(new Map<string, naver.maps.Marker>());
-
+  console.log('loungeNearest',loungeNearest);
+  
   const nearestLounge = useMemo(() => {
     if (!currentLoc) return null;
     if (lounges.length === 0) return null;

@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, text
 
 from app.db.session import get_async_session
 from app.models.lounges import Lounge
@@ -27,3 +27,42 @@ async def get_lounges(
     })
 
     return lounges
+
+@router.get("/nearest")
+async def get_nearest_lounge(
+    lat: float = Query(...),
+    lng: float = Query(...),
+    db: AsyncSession = Depends(get_async_session),
+):
+    result = await db.execute(
+        text("""
+            SELECT
+                id,
+                name,
+                type,
+                lat,
+                lng,
+                facility_shower,
+                facility_sleep_room,
+                facility_laundry,
+                facility_restaurant,
+                total_seats,
+                sido,
+                sigungu,
+                earth_distance(
+                    ll_to_earth(:lat, :lng),
+                    ll_to_earth(lat, lng)
+                ) AS distance_m
+            FROM lounges
+            ORDER BY distance_m ASC
+            LIMIT 1
+        """),
+        {"lat": lat, "lng": lng},
+    )
+
+    row = result.mappings().first()
+
+    if row is None:
+        return None
+
+    return row

@@ -12,6 +12,19 @@ export async function getLounges(): Promise<Lounge[]> {
   return response.json();
 }
 
+export async function getLoungeNearest(  
+  lat: number,
+  lng: number
+): Promise<Lounge> {
+  const response = await fetch(`${API_BASE_URL}api/lounges/nearest?lat=${lat}&lng=${lng}`);
+
+  if (!response.ok) {
+    throw new Error("가장 가까운 라운지 조회 실패");
+  }
+
+  return response.json();
+}
+
 export async function dbping(): Promise<[]> {
   const response = await fetch(`${API_BASE_URL}dbping`);
 

@@ -24,7 +24,13 @@ load_dotenv(_env_file)
 
 DATABASE_URL = os.environ["DATABASE_URL"]
 
-engine = create_async_engine(DATABASE_URL, echo=False)
+engine = create_async_engine(
+    DATABASE_URL, 
+    echo=False,
+    connect_args={
+        "statement_cache_size": 0,
+    }
+)
 async_session_factory = async_sessionmaker(
     engine, class_=AsyncSession, expire_on_commit=False
 )

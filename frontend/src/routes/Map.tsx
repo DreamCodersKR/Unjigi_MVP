@@ -21,11 +21,10 @@ export default function MapPage() {
     searchParams.get('focus') === 'nearest' 
     ? useLoungeNearest(DEFAULT_Coord.lat, DEFAULT_Coord.lng) 
     : useLounges();
-  const loungesCircle = useLoungesCircle(DEFAULT_Coord.lat, DEFAULT_Coord.lng, 30);
+  useLoungesCircle(DEFAULT_Coord.lat, DEFAULT_Coord.lng, 30);
 
   useLoungeMarkers({ map, lounges, isLoading });
    
-  console.log('loungeCircle',loungesCircle);
 
   return (
   <div className="relative w-full h-screen">

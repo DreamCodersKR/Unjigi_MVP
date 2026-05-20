@@ -9,7 +9,6 @@
 import os
 from pathlib import Path
 from collections.abc import AsyncGenerator
-from sqlalchemy.pool import NullPool
 
 from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import (
@@ -29,7 +28,6 @@ engine = create_async_engine(
     DATABASE_URL, 
     echo=False,
     pool_pre_ping=True,
-    poolclass=NullPool,
     connect_args={
         "statement_cache_size": 0,
         "prepared_statement_cache_size": 0

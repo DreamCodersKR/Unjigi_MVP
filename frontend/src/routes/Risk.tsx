@@ -1,9 +1,12 @@
+import { useNavigate  } from "react-router-dom";
 import { RiskGauge } from "@/components/RiskGauge";
 import { RiskSparkline } from "@/components/RiskSparkline";
 import { NearbyLoungeButton } from "@/components/NearbyLoungeButton";
 import { useRisk } from '@/hooks/useRisk';
+import { Button } from '@/components/ui/button';
 
 export default function Risk() {
+  const navigate = useNavigate();
   const { data, isLoading } = useRisk();
  
   if (isLoading) return <div>로딩 중...</div>;
@@ -22,6 +25,10 @@ export default function Risk() {
       </div>
  
       <NearbyLoungeButton distance={12}/>
+      <Button size="lg" className="w-full bg-orange-500"
+          onClick={() => navigate('/')}>
+          ⚡ 기본 화면으로
+      </Button>
     </div>
   );
 

@@ -12,9 +12,11 @@ export function RunEndButton() {
   const handleConfirm = () => {
     endTrip();
     setOpen(false);
-    if (location.pathname !== "/") {
-      navigate("/");
-    }
+
+    navigate("/", {
+      state: { showTripSummary: true },
+      replace: true,
+    });
   };
 
   return (

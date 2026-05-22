@@ -21,7 +21,7 @@ export function RiskGauge({ score, level }: Props) {
   const color = LEVEL_COLORS[level];
  
   return (
-    <div className="relative w-60 h-60 mx-auto">
+    <div className="relative w-60 h-45 mx-auto">
       <ResponsiveContainer>
         <RadialBarChart
           innerRadius="70%" outerRadius="100%"

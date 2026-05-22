@@ -1,15 +1,20 @@
 import { useState } from "react";
+import { useNavigate  } from "react-router-dom";
 import { useTripStore } from "@/stores/trip";
 import { ConfirmWindow } from "@/components/ConfirmWindow";
 import { Button as UIButton } from "@/components/ui/button";
 
 export function RunEndButton() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const endTrip = useTripStore((s) => s.endTrip);
 
   const handleConfirm = () => {
     endTrip();
     setOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
   };
 
   return (
@@ -17,14 +22,18 @@ export function RunEndButton() {
       <UIButton 
         onClick={() => setOpen(true)}
         className="
+          h-auto
+          min-h-14
           w-full
-          max-w-sm
-          h-14
-          bg-red-600
-          hover:bg-red-700
-          text-white
-          text-lg
           rounded-xl
+          bg-red-600
+          px-6
+          py-3
+          text-lg
+          font-bold
+          text-white
+          shadow-sm
+          hover:bg-red-700
         "
       >
         🚛운행 종료

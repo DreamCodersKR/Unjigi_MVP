@@ -13,7 +13,20 @@ export function NearbyLoungeButton({ distance }: Props) {
   return (
     <Button
       size="lg"
-      className="w-full mt-6"
+      className="
+        h-auto
+        min-h-12
+        w-full
+        rounded-lg
+        bg-zinc-900
+        px-5
+        py-4
+        text-sm
+        font-bold
+        text-white
+        shadow-sm
+        hover:bg-zinc-800
+      "
       onClick={() => navigate('/map?focus=nearest')}
     >
       <MapPin className="mr-2 h-5 w-5" />

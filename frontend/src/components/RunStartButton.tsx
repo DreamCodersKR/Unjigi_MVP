@@ -35,7 +35,10 @@ export function RunStartButton() {
           text-lg
         "
       >
-        🚛운행 시작
+        <span className="flex flex-col items-center justify-center gap-2 leading-none">
+          <span className="text-xl">🚛 운행 시작</span>
+          <span className="text-sm font-medium text-orange-500">탭하여 시작</span>
+        </span>
       </UIButton>
       <ConfirmWindow
         open={open}

@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/button';
 import { RunEndButton } from "@/components/RunEndButton";
 import { BottomTabBar } from "@/components/BottomTabBar";
 import { RiskFactors } from "@/components/RiskFactors";
+import { useBackgroundEntryToast } from "@/hooks/useBackgroundEntryToast";
 
 export default function Risk() {
+  useBackgroundEntryToast();
   const navigate = useNavigate();
   const { data, isLoading } = useRisk();
  

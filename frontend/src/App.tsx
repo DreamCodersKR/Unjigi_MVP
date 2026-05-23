@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from 'sonner';
 import Home from "./routes/Home";
 import Map from "./routes/Map";
 import Risk from "./routes/Risk";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/rest-area" element={<RestArea/>} />
         <Route path="*" element={<div>페이지를 찾을 수 없습니다</div>} />
       </Routes>
+      <Toaster position="top-center" />
     </BrowserRouter>
   );
 }

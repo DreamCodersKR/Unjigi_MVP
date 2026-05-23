@@ -93,7 +93,7 @@ export default function TripSummary({
             onClick={onClose}
             className="w-full rounded-xl bg-orange-500 py-3 text-sm font-bold text-white transition hover:bg-orange-600 active:bg-orange-700"
           >
-            메인 화면으로
+            요약 화면 종료
           </button>
 
           <p className="mt-2 text-center text-xs text-gray-400">

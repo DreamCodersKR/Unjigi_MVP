@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { useNavigate  } from "react-router-dom";
 import { useTripStore } from "@/stores/trip";
 import { ConfirmWindow } from "@/components/ConfirmWindow";
 import { Button as UIButton } from "@/components/ui/button";
 
 export function RunStartButton() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const startTrip = useTripStore((s) => s.startTrip);
 
   const handleConfirm = () => {
     startTrip("demo");
     setOpen(false);
+    navigate("/risk");
   };
 
   return (

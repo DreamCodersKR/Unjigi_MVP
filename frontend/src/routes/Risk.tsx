@@ -8,11 +8,20 @@ import { RunEndButton } from "@/components/RunEndButton";
 import { BottomTabBar } from "@/components/BottomTabBar";
 import { RiskFactors } from "@/components/RiskFactors";
 import { useBackgroundEntryToast } from "@/hooks/useBackgroundEntryToast";
+import { useProactiveCompanion } from "@/hooks/useProactiveCompanion";
+import { useTripStore } from '@/stores/trip';
 
 export default function Risk() {
-  useBackgroundEntryToast();
   const navigate = useNavigate();
   const { data, isLoading } = useRisk();
+  const { currentLevel, tripStartedAt } = useTripStore();
+
+  useBackgroundEntryToast();
+
+  useProactiveCompanion({
+    level: currentLevel,
+    tripStartedAt,
+  });
  
   if (isLoading) return <div>로딩 중...</div>;
   if (!data) return <div>데이터 없음</div>;

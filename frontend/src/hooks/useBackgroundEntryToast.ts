@@ -11,8 +11,6 @@ export function useBackgroundEntryToast() {
     if (didRunRef.current) return;
     if (!isRunning || hasShownBackgroundToast) return;
 
-    console.log('useBackgroundEntryToast');
-
     didRunRef.current = true;
     markBackgroundToastShown();
 

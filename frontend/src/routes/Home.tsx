@@ -5,6 +5,7 @@ import { useTripStore } from '@/stores/trip';
 import { RunningHomeView } from "@/components/RunningHomeView";
 import { IdleHomeView } from "@/components/IdleHomeView";
 import TripSummary from "@/components/TripSummary";
+import { TabScreen } from "@/components/layout/TabScreen";
 
 export default function Home() {
   const [summaryOpen, setSummaryOpen] = useState(false);
@@ -41,13 +42,12 @@ export default function Home() {
   }, [summaryOpen]);
 
   return (
-    <div className="min-h-screen bg-white p-4">
+    <TabScreen>
       {isRunning ? <RunningHomeView /> : <IdleHomeView />}
       <TripSummary
         open={summaryOpen}
         onClose={() => setSummaryOpen(false)}
       />
-    </div>
-
+    </TabScreen>
   );
 }

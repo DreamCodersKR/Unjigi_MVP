@@ -1,6 +1,6 @@
 export function QuickInfo() {
   return (
-    <section className="mt-8 overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
+    <section className="overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
       <div className="flex items-center justify-between border-b border-zinc-100 px-4 py-3">
         <div className="flex items-center gap-2">
           <span className="text-base">📍</span>

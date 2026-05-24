@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTripStore } from "@/stores/trip";
 import { ConfirmWindow } from "@/components/ConfirmWindow";
 import { Button as UIButton } from "@/components/ui/button";
@@ -21,16 +21,16 @@ export function RunEndButton() {
 
   return (
     <div>
-      <UIButton 
+      <UIButton
         onClick={() => setOpen(true)}
         className="
           h-auto
-          min-h-14
+          min-h-12
           w-full
           rounded-xl
           bg-red-600
           px-6
-          py-3
+          py-2
           text-lg
           font-bold
           text-white
@@ -38,7 +38,7 @@ export function RunEndButton() {
           hover:bg-red-700
         "
       >
-        🚛운행 종료
+        🚛 운행 종료
       </UIButton>
       <ConfirmWindow
         open={open}

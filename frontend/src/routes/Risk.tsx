@@ -11,12 +11,14 @@ import { RiskFactors } from "@/components/RiskFactors";
 import { useBackgroundEntryToast } from "@/hooks/useBackgroundEntryToast";
 import { useProactiveCompanion } from "@/hooks/useProactiveCompanion";
 import { useRestAreaDetection } from "@/hooks/useRestAreaDetection";
+import { useTripElapsedTime } from "@/hooks/useTripElapsedTime";
 import { useTripStore } from "@/stores/trip";
 
 export default function Risk() {
   const navigate = useNavigate();
   const { data, isLoading } = useRisk();
   const { currentLevel, tripStartedAt, isRunning, updateRisk } = useTripStore();
+  const elapsedText = useTripElapsedTime(tripStartedAt);
 
   useEffect(() => {
     if (!isRunning) {
@@ -44,6 +46,14 @@ export default function Risk() {
   return (
     <div className="p-4 max-w-md mx-auto">
       <h1 className="text-2xl font-bold mb-2">운행 위험도</h1>
+      <section className="mb-4 rounded-md border border-zinc-200 bg-white text-center">
+        <div className="border-b border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-500">
+          운행 시간
+        </div>
+        <div className="px-4 py-3">
+          <p className="text-3xl font-extrabold text-orange-700">{elapsedText}</p>
+        </div>
+      </section>
 
       <RiskGauge score={data.score} level={data.level} />
 

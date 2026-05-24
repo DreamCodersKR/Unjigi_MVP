@@ -5,6 +5,9 @@ import "./TabScreen.css";
 
 type TabScreenProps = {
   children: ReactNode;
+  bottomAction?: ReactNode;
+  className?: string;
+  contentClassName?: string;
 };
 
 type TabScreenContentProps = {
@@ -12,12 +15,26 @@ type TabScreenContentProps = {
   className?: string;
 };
 
-export function TabScreen({ children }: TabScreenProps) {
+export function TabScreen({
+  children,
+  bottomAction,
+  className,
+  contentClassName,
+}: TabScreenProps) {
   return (
     <>
-      <main className="tab-screen">
-        <TabScreenContent>{children}</TabScreenContent>
+      <main
+        className={cn(
+          "tab-screen",
+          bottomAction && "tab-screen--with-bottom-action",
+          className
+        )}
+      >
+        <TabScreenContent className={contentClassName}>{children}</TabScreenContent>
       </main>
+      {bottomAction ? (
+        <TabScreenBottomAction>{bottomAction}</TabScreenBottomAction>
+      ) : null}
       <BottomTabBar />
     </>
   );

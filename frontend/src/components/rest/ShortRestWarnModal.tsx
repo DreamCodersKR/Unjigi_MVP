@@ -1,8 +1,14 @@
 type ShortRestWarnModalProps = {
   open: boolean;
+  onCancel: () => void;
+  onConfirm: () => void;
 };
 
-export function ShortRestWarnModal({ open }: ShortRestWarnModalProps) {
+export function ShortRestWarnModal({
+  open,
+  onCancel,
+  onConfirm,
+}: ShortRestWarnModalProps) {
   if (!open) return null;
 
   return (
@@ -13,15 +19,26 @@ export function ShortRestWarnModal({ open }: ShortRestWarnModalProps) {
         </h2>
 
         <p className="mt-3 text-sm font-medium text-zinc-500">
-          30분 미만 휴식 후 운행을 재개하면 위험도가 올라갈 수 있습니다.
+          30분 미만 휴식 후 운행을 재개하면 위험도가 다시 높아질 수 있습니다.
         </p>
 
-        <button
-          type="button"
-          className="mt-5 w-full rounded-lg bg-orange-500 px-4 py-3 text-sm font-bold text-white"
-        >
-          확인
-        </button>
+        <div className="mt-5 grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm font-bold text-zinc-700"
+          >
+            조금 더 쉬기
+          </button>
+
+          <button
+            type="button"
+            onClick={onConfirm}
+            className="rounded-lg bg-orange-500 px-4 py-3 text-sm font-bold text-white"
+          >
+            그래도 재개
+          </button>
+        </div>
       </div>
     </div>
   );

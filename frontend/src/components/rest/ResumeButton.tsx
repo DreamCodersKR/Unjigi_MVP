@@ -1,28 +1,39 @@
-export function ResumeButton() {
+type ResumeButtonProps = {
+  disabled?: boolean;
+  isRecommended: boolean;
+  onClick: () => void;
+};
+
+export function ResumeButton({
+  disabled = false,
+  isRecommended,
+  onClick,
+}: ResumeButtonProps) {
   return (
     <section className="border-b border-zinc-300 px-4 py-4 text-center">
       <button
         type="button"
-        className="
+        className={`
           w-full
           rounded-md
           border
-          border-zinc-300
-          bg-zinc-100
           px-4
           py-3
-          text-base
+          text-lg
           font-bold
-          text-zinc-600
           shadow-sm
-        "
-        disabled
+          ${isRecommended
+            ? "border-green-500 bg-green-600 text-white"
+            : "border-orange-300 bg-orange-50 text-orange-700"}
+        `}
+        disabled={disabled}
+        onClick={onClick}
       >
-        [✅ 7분 더 쉬세요]
+        🚛운행 재개
       </button>
 
       <p className="mt-3 text-xs font-medium text-zinc-400">
-        (30분 미만 시 회색, 30분 후 초록 “휴식 완료 → 운행 재개”)
+        30분 미만(MVP 20초 조정) 휴식 후 재개하면 경고가 표시됩니다.
       </p>
     </section>
   );

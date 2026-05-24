@@ -15,13 +15,18 @@ import { useTripStore } from "@/stores/trip";
 export default function Risk() {
   const navigate = useNavigate();
   const { data, isLoading } = useRisk();
-  const { currentLevel, tripStartedAt, isRunning } = useTripStore();
+  const { currentLevel, tripStartedAt, isRunning, updateRisk } = useTripStore();
 
   useEffect(() => {
     if (!isRunning) {
       navigate("/", { replace: true });
     }
   }, [isRunning, navigate]);
+
+  useEffect(() => {
+    if (!data) return;
+    updateRisk(data.score, data.level);
+  }, [data, updateRisk]);
 
   useBackgroundEntryToast();
 

@@ -10,6 +10,7 @@ import { BottomTabBar } from "@/components/BottomTabBar";
 import { RiskFactors } from "@/components/RiskFactors";
 import { useBackgroundEntryToast } from "@/hooks/useBackgroundEntryToast";
 import { useProactiveCompanion } from "@/hooks/useProactiveCompanion";
+import { useRestAreaDetection } from "@/hooks/useRestAreaDetection";
 import { useTripStore } from "@/stores/trip";
 
 export default function Risk() {
@@ -29,6 +30,7 @@ export default function Risk() {
   }, [data, updateRisk]);
 
   useBackgroundEntryToast();
+  useRestAreaDetection();
 
   useProactiveCompanion({
     level: currentLevel,

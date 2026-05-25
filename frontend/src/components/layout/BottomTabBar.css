@@ -39,8 +39,8 @@
 }
 
 .bottom-tab-bar__item--active {
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: rgb(249 115 22);
+  color: white;
 }
 
 .bottom-tab-bar__icon {

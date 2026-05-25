@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { BottomTabBar } from "@/components/BottomTabBar";
 import { cn } from "@/lib/utils";
 import "./TabScreen.css";
 
@@ -35,7 +34,6 @@ export function TabScreen({
       {bottomAction ? (
         <TabScreenBottomAction>{bottomAction}</TabScreenBottomAction>
       ) : null}
-      <BottomTabBar />
     </>
   );
 }

@@ -1,12 +1,10 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { History, Map, Settings, Users } from "lucide-react";
 import "./BottomTabBar.css";
 
 const pendingMessage = "준비 중인 기능입니다";
 
 export function BottomTabBar() {
-  const navigate = useNavigate();
-
   const handlePendingClick = () => {
     alert(pendingMessage);
   };
@@ -14,18 +12,13 @@ export function BottomTabBar() {
   return (
     <nav className="bottom-tab-bar">
       <div className="bottom-tab-bar__grid">
-        <NavLink
+        <Link
           to="/map"
-          className={({ isActive }) =>
-            [
-              "bottom-tab-bar__item",
-              isActive ? "bottom-tab-bar__item--active" : "",
-            ].join(" ")
-          }
+          className="bottom-tab-bar__item bottom-tab-bar__item--active"
         >
           <Map className="bottom-tab-bar__icon" aria-hidden="true" />
           <span>지도</span>
-        </NavLink>
+        </Link>
 
         <button
           type="button"
@@ -47,10 +40,7 @@ export function BottomTabBar() {
 
         <button
           type="button"
-          onClick={() => {
-            handlePendingClick();
-            navigate(window.location.pathname);
-          }}
+          onClick={handlePendingClick}
           className="bottom-tab-bar__item"
         >
           <Settings className="bottom-tab-bar__icon" aria-hidden="true" />

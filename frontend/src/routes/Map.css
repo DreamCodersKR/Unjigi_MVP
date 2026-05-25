@@ -1,0 +1,41 @@
+.map-screen {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.map-screen__status {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  border: 1px solid rgb(228 228 231);
+  background: white;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.map-screen__control {
+  position: absolute;
+  left: 1rem;
+  z-index: 10;
+  border: 1px solid rgb(228 228 231);
+  background: white;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.map-screen__control--home {
+  top: 1rem;
+}
+
+.map-screen__control--refresh {
+  top: 4rem;
+}
+
+.map-screen__canvas {
+  width: 100%;
+  height: 100vh;
+}

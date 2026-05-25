@@ -7,6 +7,7 @@ import { RestTimer } from "@/components/rest/RestTimer";
 import { FacilityCards } from "@/components/rest/FacilityCards";
 import { ResumeButton } from "@/components/rest/ResumeButton";
 import { ShortRestWarnModal } from "@/components/rest/ShortRestWarnModal";
+import "./RestArea.css";
 
 const MIN_REST_SECONDS = import.meta.env.DEV ? 20 : 30 * 60;
 
@@ -64,8 +65,8 @@ export default function RestArea() {
   }
 
   return (
-    <main className="min-h-screen bg-white px-4 py-3 pb-28">
-      <div className="mx-auto w-full max-w-md overflow-hidden rounded-md border border-zinc-300 bg-white shadow-sm">
+    <main className="rest-area-screen">
+      <div className="rest-area-panel">
         <RestHeader />
 
         <RestTimer
@@ -80,7 +81,7 @@ export default function RestArea() {
           onClick={handleResumeClick}
         />
 
-        <div className="border-t border-zinc-200 px-4 py-4">
+        <div className="rest-area-end-action">
           <RunEndButton />
         </div>
       </div>

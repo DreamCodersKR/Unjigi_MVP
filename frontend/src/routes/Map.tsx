@@ -5,6 +5,7 @@ import type { Coord } from "@/types/geo";
 import  { DEFAULT_Coord } from "@/utils/geo";
 import { useLoungeMarkers } from "@/hooks/useLoungeMarkers";
 import { useNaverMap } from "@/hooks/useNaverMap";
+import "./Map.css";
 
 declare global {
   interface Window {
@@ -27,27 +28,27 @@ export default function MapPage() {
    
 
   return (
-  <div className="relative w-full h-screen">
-    {isLoading && <div>라운지 로딩중...</div>}
-    {error && <div>라운지 에러 발생: {error.message}</div>}
+  <div className="map-screen">
+    {isLoading && <div className="map-screen__status">라운지 로딩중...</div>}
+    {error && <div className="map-screen__status">라운지 에러 발생: {error.message}</div>}
 
     <Link
       to="/"
-      className="absolute top-4 left-4 z-10 bg-white p-2 border"
+      className="map-screen__control map-screen__control--home"
     >
       홈으로 돌아가기
     </Link>
     
     <button
       onClick={() => refetch()}
-      className="absolute top-16 left-4 z-10 bg-white p-2 border"
+      className="map-screen__control map-screen__control--refresh"
     >
       라운지 불러오기
     </button>
 
     <div
       ref={mapRef}
-      className="w-full h-screen"
+      className="map-screen__canvas"
     />
   </div>
   );

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTripStore } from "@/stores/trip";
+import "./StartTripModal.css";
 
 type TripMode = "normal" | "demo";
 
@@ -16,27 +17,27 @@ export default function StartTripModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white font-sans text-[13px] text-[#222]">
-      <div className="flex h-dvh w-full flex-col border border-[#777] bg-white">
-        <header className="grid h-6 shrink-0 grid-cols-[24px_1fr_24px] items-center border-b border-[#777] bg-[#e6e6e6]">
+    <div className="start-trip-modal">
+      <div className="start-trip-modal__window">
+        <header className="start-trip-modal__header">
           <button
             type="button"
             onClick={() => navigate("/")}
             aria-label="닫기"
-            className="h-full border-r border-[#999] text-lg leading-none"
+            className="start-trip-modal__close"
           >
             ×
           </button>
-          <div className="text-center text-[14px] font-semibold">운행 시작</div>
+          <div className="start-trip-modal__title">운행 시작</div>
         </header>
 
-        <main className="flex min-h-0 flex-1 flex-col">
-          <section className="flex h-[52px] shrink-0 items-center gap-2 border-b border-[#999] px-3 text-[16px] font-bold">
+        <main className="start-trip-modal__body">
+          <section className="start-trip-modal__prompt">
             <span aria-hidden="true">🚚</span>
             <span>어떻게 시작할까요?</span>
           </section>
 
-          <section className="flex min-h-0 flex-1 flex-col justify-start gap-10 border-b border-[#999] bg-[#fafafa] px-3 py-8">
+          <section className="start-trip-modal__options">
             <ModeOption
               accent="#f15a24"
               checked={mode === "normal"}
@@ -56,20 +57,20 @@ export default function StartTripModal() {
             />
           </section>
 
-          <label className="flex h-[54px] shrink-0 items-center gap-1 border-b border-[#999] bg-[#fafafa] px-2">
-            <span className="shrink-0 text-[13px]">목적지 (선택):</span>
+          <label className="start-trip-modal__destination">
+            <span className="start-trip-modal__destination-label">목적지 (선택):</span>
             <input
               value={destination}
               onChange={(event) => setDestination(event.target.value)}
-              className="h-[22px] min-w-0 flex-1 border border-[#777] bg-white px-1 text-[13px] outline-none"
+              className="start-trip-modal__destination-input"
             />
           </label>
 
-          <footer className="shrink-0 bg-[#ffe5dc] p-1">
+          <footer className="start-trip-modal__footer">
             <button
               type="button"
               onClick={handleStart}
-              className="h-12 w-full border border-transparent text-[13px] font-bold text-[#d94716] active:border-[#d94716]"
+              className="start-trip-modal__submit"
             >
               [🚚 운행 시작]
             </button>
@@ -98,11 +99,11 @@ function ModeOption({
   onClick,
 }: ModeOptionProps) {
   return (
-    <div className="relative border-t pt-3" style={{ borderColor: accent }}>
-      <span
-        className="absolute -top-[8px] left-3 bg-[#fafafa] px-1 font-semibold"
-        style={{ color: accent }}
-      >
+    <div
+      className="trip-mode-option"
+      style={{ "--trip-mode-accent": accent } as CSSProperties}
+    >
+      <span className="trip-mode-option__label">
         {label}
       </span>
 
@@ -110,25 +111,20 @@ function ModeOption({
         type="button"
         onClick={onClick}
         aria-pressed={checked}
-        className="w-full border px-3 py-3 text-left"
-        style={{
-          borderColor: checked ? accent : "#c8c8c8",
-          backgroundColor: checked ? `${accent}1f` : "#fff",
-          color: checked ? accent : "#333",
-        }}
+        className="trip-mode-option__button"
       >
-        <div className="mb-2 flex items-center gap-2 font-semibold">
+        <div className="trip-mode-option__title">
           <span aria-hidden="true">|</span>
           <span>{title}</span>
         </div>
-        <div className="space-y-1 pl-4 text-[#444]">
+        <div className="trip-mode-option__descriptions">
           {descriptions.map((description) => (
             <p key={description}>· {description}</p>
           ))}
         </div>
       </button>
 
-      <div className="mt-4 h-[18px] border-b border-l" style={{ borderColor: accent }} />
+      <div className="trip-mode-option__tail" />
     </div>
   );
 }

@@ -8,17 +8,17 @@ export function RiskFactors({
   visibilityText = "long_drive",
 }: RiskFactorsProps) {
   return (
-    <section className="w-full overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
-      <div className="flex items-center gap-2 border-b border-zinc-100 px-4 py-2">
-        <span className="text-base">📊</span>
-        <span className="text-sm font-medium text-orange-600">
+    <section className="risk-factors">
+      <div className="risk-factors__row risk-factors__row--primary">
+        <span className="risk-factors__icon">📊</span>
+        <span className="risk-factors__text risk-factors__text--primary">
           {driveDurationText}
         </span>
       </div>
 
-      <div className="flex items-center gap-2 px-4 py-2">
-        <span className="text-base">🌙</span>
-        <span className="text-sm font-medium text-zinc-600">
+      <div className="risk-factors__row">
+        <span className="risk-factors__icon">🌙</span>
+        <span className="risk-factors__text risk-factors__text--secondary">
           {visibilityText}
         </span>
       </div>

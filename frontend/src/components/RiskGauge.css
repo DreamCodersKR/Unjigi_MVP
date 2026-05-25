@@ -1,0 +1,53 @@
+.risk-gauge {
+  position: relative;
+  margin-inline: auto;
+}
+
+.risk-gauge--compact {
+  height: 7rem;
+  width: 100%;
+}
+
+.risk-gauge--default {
+  height: 9rem;
+  width: 13rem;
+}
+
+.risk-gauge__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--risk-gauge-color);
+}
+
+.risk-gauge__score {
+  font-weight: 700;
+}
+
+.risk-gauge__score--compact {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.risk-gauge__score--default {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.risk-gauge__level {
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+.risk-gauge__level--compact {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.risk-gauge__level--default {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}

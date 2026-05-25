@@ -47,3 +47,52 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+
+.risk-screen__home-button {
+  height: auto;
+  width: 100%;
+  background: rgb(249 115 22);
+  padding-block: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+.risk-factors {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgb(228 228 231);
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+
+.risk-factors__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.risk-factors__row--primary {
+  border-bottom: 1px solid rgb(244 244 245);
+}
+
+.risk-factors__icon {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.risk-factors__text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+
+.risk-factors__text--primary {
+  color: rgb(234 88 12);
+}
+
+.risk-factors__text--secondary {
+  color: rgb(82 82 91);
+}

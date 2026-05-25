@@ -1,0 +1,23 @@
+.nearby-lounge-button {
+  height: auto;
+  min-height: 2.5rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  background: rgb(24 24 27);
+  padding: 0.75rem 1.25rem;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+
+.nearby-lounge-button:hover {
+  background: rgb(39 39 42);
+}
+
+.nearby-lounge-button__icon {
+  margin-right: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}

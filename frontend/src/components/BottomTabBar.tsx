@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { History, Map, Settings, Users } from "lucide-react";
+import "./BottomTabBar.css";
 
 const pendingMessage = "준비 중인 기능입니다";
 
@@ -11,38 +12,36 @@ export function BottomTabBar() {
   };
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur">
-      <div className="mx-auto grid max-w-md grid-cols-4 gap-1">
+    <nav className="bottom-tab-bar">
+      <div className="bottom-tab-bar__grid">
         <NavLink
           to="/map"
           className={({ isActive }) =>
             [
-              "flex h-14 flex-col items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors",
-              isActive
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+              "bottom-tab-bar__item",
+              isActive ? "bottom-tab-bar__item--active" : "",
             ].join(" ")
           }
         >
-          <Map className="size-5" aria-hidden="true" />
+          <Map className="bottom-tab-bar__icon" aria-hidden="true" />
           <span>지도</span>
         </NavLink>
 
         <button
           type="button"
           onClick={handlePendingClick}
-          className="flex h-14 flex-col items-center justify-center gap-1 rounded-lg text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="bottom-tab-bar__item"
         >
-          <History className="size-5" aria-hidden="true" />
+          <History className="bottom-tab-bar__icon" aria-hidden="true" />
           <span>기록</span>
         </button>
 
         <button
           type="button"
           onClick={handlePendingClick}
-          className="flex h-14 flex-col items-center justify-center gap-1 rounded-lg text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="bottom-tab-bar__item"
         >
-          <Users className="size-5" aria-hidden="true" />
+          <Users className="bottom-tab-bar__icon" aria-hidden="true" />
           <span>가족</span>
         </button>
 
@@ -52,9 +51,9 @@ export function BottomTabBar() {
             handlePendingClick();
             navigate(window.location.pathname);
           }}
-          className="flex h-14 flex-col items-center justify-center gap-1 rounded-lg text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="bottom-tab-bar__item"
         >
-          <Settings className="size-5" aria-hidden="true" />
+          <Settings className="bottom-tab-bar__icon" aria-hidden="true" />
           <span>설정</span>
         </button>
       </div>

@@ -1,4 +1,6 @@
 import { RadialBarChart, RadialBar, PolarAngleAxis, ResponsiveContainer } from 'recharts';
+import type { CSSProperties } from 'react';
+import "./RiskGauge.css";
 
 interface Props {
   score: number;     // 0 ~ 100
@@ -23,9 +25,13 @@ const LEVEL_LABELS = {
 export function RiskGauge({ score, level, compact = false }: Props) {
   const data = [{ score }];
   const color = LEVEL_COLORS[level];
+  const sizeClass = compact ? 'compact' : 'default';
 
   return (
-    <div className={`relative mx-auto ${compact ? 'h-28 w-full' : 'h-36 w-52'}`}>
+    <div
+      className={`risk-gauge risk-gauge--${sizeClass}`}
+      style={{ "--risk-gauge-color": color } as CSSProperties}
+    >
       <ResponsiveContainer>
         <RadialBarChart
           innerRadius="70%"
@@ -38,9 +44,9 @@ export function RiskGauge({ score, level, compact = false }: Props) {
           <RadialBar dataKey="score" fill={color} background={{ fill: '#E5E7EB' }} />
         </RadialBarChart>
       </ResponsiveContainer>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <div className={compact ? 'text-3xl font-bold' : 'text-4xl font-bold'} style={{ color }}>{score}</div>
-        <div className={compact ? 'mt-1 text-base font-semibold' : 'mt-1 text-lg font-semibold'} style={{ color }}>
+      <div className="risk-gauge__label">
+        <div className={`risk-gauge__score risk-gauge__score--${sizeClass}`}>{score}</div>
+        <div className={`risk-gauge__level risk-gauge__level--${sizeClass}`}>
           {level} {LEVEL_LABELS[level]}
         </div>
       </div>

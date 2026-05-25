@@ -10,17 +10,17 @@ export function RunningHomeView() {
 
   return (
     <>
-      <div className="rounded-lg bg-orange-50 p-5 text-center text-2xl font-bold text-orange-700">
+      <div className="home-running-status">
         🚛 운행 중
       </div>
       <Button
         size="lg"
-        className="w-full bg-orange-500 py-9 text-xl"
+        className="home-running-risk-button"
         onClick={() => navigate('/risk')}
       >
-        <span className="flex flex-col items-center justify-center gap-2 leading-none">
+        <span className="home-running-risk-button__content">
           <span>⚡ 운행 화면으로</span>
-          <span className="text-sm font-medium text-orange-100">
+          <span className="home-running-risk-button__meta">
             현재 위험: {data?.level} ({data?.score}점)
           </span>
         </span>

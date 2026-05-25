@@ -71,7 +71,7 @@ export default function Risk() {
 
       <Button
         size="lg"
-        className="h-auto w-full bg-orange-500 py-2 text-base font-bold"
+        className="risk-screen__home-button"
         onClick={() => navigate("/")}
       >
         기본 화면으로

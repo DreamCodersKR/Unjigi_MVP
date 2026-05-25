@@ -6,6 +6,7 @@ import { RunningHomeView } from "@/components/RunningHomeView";
 import { IdleHomeView } from "@/components/IdleHomeView";
 import TripSummary from "@/components/TripSummary";
 import { TabScreen } from "@/components/layout/TabScreen";
+import "./Home.css";
 
 export default function Home() {
   const [summaryOpen, setSummaryOpen] = useState(false);

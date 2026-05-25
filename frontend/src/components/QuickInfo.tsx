@@ -1,30 +1,30 @@
 export function QuickInfo() {
   return (
-    <section className="overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
-      <div className="flex items-center justify-between border-b border-zinc-100 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="text-base">📍</span>
-          <span className="text-sm font-medium text-zinc-700">
+    <section className="home-quick-info">
+      <div className="home-quick-info__row">
+        <div className="home-quick-info__label">
+          <span className="home-quick-info__icon">📍</span>
+          <span className="home-quick-info__text">
             가까운 라운지
           </span>
         </div>
-        <span className="text-sm font-semibold text-zinc-900">1곳 (5km)</span>
+        <span className="home-quick-info__value">1곳 (5km)</span>
       </div>
 
-      <div className="flex items-center justify-between border-b border-zinc-100 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="text-base">💤</span>
-          <span className="text-sm font-medium text-zinc-700">어제 운행</span>
+      <div className="home-quick-info__row">
+        <div className="home-quick-info__label">
+          <span className="home-quick-info__icon">💤</span>
+          <span className="home-quick-info__text">어제 운행</span>
         </div>
-        <span className="text-sm font-semibold text-zinc-900">8시간 12분</span>
+        <span className="home-quick-info__value">8시간 12분</span>
       </div>
 
-      <div className="flex items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="text-base">⭐</span>
-          <span className="text-sm font-medium text-zinc-700">안전 점수</span>
+      <div className="home-quick-info__row">
+        <div className="home-quick-info__label">
+          <span className="home-quick-info__icon">⭐</span>
+          <span className="home-quick-info__text">안전 점수</span>
         </div>
-        <span className="text-sm font-semibold text-zinc-900">87점</span>
+        <span className="home-quick-info__value">87점</span>
       </div>
     </section>
   );

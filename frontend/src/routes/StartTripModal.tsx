@@ -70,7 +70,7 @@ export default function StartTripModal() {
             <button
               type="button"
               onClick={handleStart}
-              className="start-trip-modal__submit"
+              className="h-14 w-full rounded-lg border border-transparent bg-orange-500 text-base font-bold text-white active:bg-orange-600"
             >
               [🚚 운행 시작]
             </button>

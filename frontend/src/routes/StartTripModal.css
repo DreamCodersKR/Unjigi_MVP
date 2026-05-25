@@ -100,21 +100,8 @@
 
 .start-trip-modal__footer {
   flex-shrink: 0;
-  background: rgb(255 229 220);
-  padding: 0.25rem;
-}
-
-.start-trip-modal__submit {
-  height: 3rem;
-  width: 100%;
-  border: 1px solid transparent;
-  color: rgb(217 71 22);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.start-trip-modal__submit:active {
-  border-color: rgb(217 71 22);
+  background: rgb(250 250 250);
+  padding: 0.5rem;
 }
 
 .trip-mode-option {

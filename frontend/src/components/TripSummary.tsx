@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./TripSummary.css";
 
 interface TripSummaryProps {
   open: boolean;
@@ -38,17 +39,15 @@ export default function TripSummary({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
-      <div className="w-full max-w-sm overflow-hidden rounded-2xl bg-white shadow-xl">
-        {/* Header */}
-        <div className="border-b px-6 py-5 text-center">
-          <h2 className="text-xl font-bold text-emerald-600">
+    <div className="trip-summary">
+      <div className="trip-summary__panel">
+        <div className="trip-summary__header">
+          <h2 className="trip-summary__title">
             🎉 운행 완료!
           </h2>
         </div>
 
-        {/* Body */}
-        <div className="space-y-4 px-6 py-6 text-sm text-gray-700">
+        <div className="trip-summary__body">
           <SummaryRow
             icon="⏱"
             label="운행 시간"
@@ -77,26 +76,25 @@ export default function TripSummary({
             icon="⭐"
             label="안전 점수"
             value="82점"
-            valueClassName="font-bold text-emerald-600"
+            valueClassName="trip-summary-row__value--safe"
           />
 
-          <div className="rounded-xl bg-emerald-50 px-4 py-3 text-emerald-700">
+          <div className="trip-summary__notice">
             👨‍👩‍👧 가족 알림 발송 완료
-            <span className="ml-1 text-xs text-gray-500">(mock)</span>
+            <span className="trip-summary__notice-meta">(mock)</span>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="border-t bg-orange-50 px-6 py-4">
+        <div className="trip-summary__footer">
           <button
             type="button"
             onClick={onClose}
-            className="w-full rounded-xl bg-orange-500 py-3 text-sm font-bold text-white transition hover:bg-orange-600 active:bg-orange-700"
+            className="trip-summary__close"
           >
             요약 화면 종료
           </button>
 
-          <p className="mt-2 text-center text-xs text-gray-400">
+          <p className="trip-summary__countdown">
             자동 {remainingSeconds}초 후 메인 화면으로 이동
           </p>
         </div>
@@ -116,16 +114,18 @@ function SummaryRow({
   icon,
   label,
   value,
-  valueClassName = "text-gray-900",
+  valueClassName = "",
 }: SummaryRowProps) {
   return (
-    <div className="flex items-center justify-between border-b pb-3 last:border-b-0">
-      <div className="flex items-center gap-2">
+    <div className="trip-summary-row">
+      <div className="trip-summary-row__label">
         <span>{icon}</span>
-        <span className="font-medium">{label}</span>
+        <span className="trip-summary-row__label-text">{label}</span>
       </div>
 
-      <span className={valueClassName}>{value}</span>
+      <span className={["trip-summary-row__value", valueClassName].filter(Boolean).join(" ")}>
+        {value}
+      </span>
     </div>
   );
 }

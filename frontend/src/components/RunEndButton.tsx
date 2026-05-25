@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTripStore } from "@/stores/trip";
 import { ConfirmWindow } from "@/components/ConfirmWindow";
 import { Button as UIButton } from "@/components/ui/button";
+import "./RunEndButton.css";
 
 export function RunEndButton() {
   const [open, setOpen] = useState(false);
@@ -23,20 +24,7 @@ export function RunEndButton() {
     <div>
       <UIButton
         onClick={() => setOpen(true)}
-        className="
-          h-auto
-          min-h-12
-          w-full
-          rounded-xl
-          bg-red-600
-          px-6
-          py-2
-          text-lg
-          font-bold
-          text-white
-          shadow-sm
-          hover:bg-red-700
-        "
+        className="run-end-button"
       >
         🚛 운행 종료
       </UIButton>

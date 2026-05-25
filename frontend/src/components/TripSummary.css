@@ -1,0 +1,122 @@
+.trip-summary {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0 0 0 / 0.5);
+  padding-inline: 1rem;
+}
+
+.trip-summary__panel {
+  width: 100%;
+  max-width: 24rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.trip-summary__header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.trip-summary__title {
+  color: rgb(5 150 105);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+}
+
+.trip-summary__body {
+  padding: 1.5rem;
+  color: rgb(55 65 81);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.trip-summary__body > * + * {
+  margin-top: 1rem;
+}
+
+.trip-summary__notice {
+  border-radius: 0.75rem;
+  background: rgb(236 253 245);
+  padding: 0.75rem 1rem;
+  color: rgb(4 120 87);
+}
+
+.trip-summary__notice-meta {
+  margin-left: 0.25rem;
+  color: rgb(107 114 128);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.trip-summary__footer {
+  border-top: 1px solid var(--border);
+  background: rgb(255 247 237);
+  padding: 1rem 1.5rem;
+}
+
+.trip-summary__close {
+  width: 100%;
+  border-radius: 0.75rem;
+  background: rgb(249 115 22);
+  padding-block: 0.75rem;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  transition: background-color 150ms ease;
+}
+
+.trip-summary__close:hover {
+  background: rgb(234 88 12);
+}
+
+.trip-summary__close:active {
+  background: rgb(194 65 12);
+}
+
+.trip-summary__countdown {
+  margin-top: 0.5rem;
+  color: rgb(156 163 175);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-align: center;
+}
+
+.trip-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.trip-summary-row:last-child {
+  border-bottom: 0;
+}
+
+.trip-summary-row__label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trip-summary-row__label-text {
+  font-weight: 500;
+}
+
+.trip-summary-row__value {
+  color: rgb(17 24 39);
+}
+
+.trip-summary-row__value--safe {
+  color: rgb(5 150 105);
+  font-weight: 700;
+}

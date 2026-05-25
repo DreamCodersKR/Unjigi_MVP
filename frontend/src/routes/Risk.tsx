@@ -77,10 +77,7 @@ export default function Risk() {
         기본 화면으로
       </Button>
 
-      <RiskFactors
-        driveDurationText={data?.factors[0]?.message}
-        visibilityText={data?.factors[0]?.type}
-      />
+      <RiskFactors factors={data.factors} />
 
       <NearbyLoungeButton distance={12} />
     </TabScreen>

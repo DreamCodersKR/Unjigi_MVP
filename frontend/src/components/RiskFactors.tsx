@@ -1,27 +1,35 @@
-type RiskFactorsProps = {
-  driveDurationText?: string;
-  visibilityText?: string;
+import type { RiskFactor } from "@/types/risk";
+
+const FACTOR_LABELS: Partial<Record<string, string>> = {
+  long_drive: "📊",
+  night_time: "🌙",
 };
 
-export function RiskFactors({
-  driveDurationText = "90분 연속 운행 중이에요",
-  visibilityText = "long_drive",
-}: RiskFactorsProps) {
+const SEVERITY_TEXT_CLASS: Record<RiskFactor["severity"], string> = {
+  low: "risk-factors__text--low",
+  medium: "risk-factors__text--medium",
+  high: "risk-factors__text--high",
+};
+
+type RiskFactorsProps = {
+  factors: RiskFactor[];
+};
+
+export function RiskFactors({ factors }: RiskFactorsProps) {
+  if (factors.length === 0) return null;
+
   return (
     <section className="risk-factors">
-      <div className="risk-factors__row risk-factors__row--primary">
-        <span className="risk-factors__icon">📊</span>
-        <span className="risk-factors__text risk-factors__text--primary">
-          {driveDurationText}
-        </span>
-      </div>
-
-      <div className="risk-factors__row">
-        <span className="risk-factors__icon">🌙</span>
-        <span className="risk-factors__text risk-factors__text--secondary">
-          {visibilityText}
-        </span>
-      </div>
+      {factors.map((factor, index) => (
+        <div key={`${factor.type}-${index}`} className="risk-factors__row">
+          <span className="risk-factors__icon" aria-hidden="true">
+            {FACTOR_LABELS[factor.type] ?? factor.type}
+          </span>
+          <span className={`risk-factors__text ${SEVERITY_TEXT_CLASS[factor.severity]}`}>
+            {factor.message}
+          </span>
+        </div>
+      ))}
     </section>
   );
 }

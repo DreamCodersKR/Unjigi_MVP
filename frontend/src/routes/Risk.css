@@ -74,10 +74,6 @@
   padding: 0.5rem 1rem;
 }
 
-.risk-factors__row--primary {
-  border-bottom: 1px solid rgb(244 244 245);
-}
-
 .risk-factors__icon {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -85,14 +81,18 @@
 
 .risk-factors__text {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.25rem;
 }
 
-.risk-factors__text--primary {
-  color: rgb(234 88 12);
+.risk-factors__text--low {
+  color: rgb(24 24 27);
 }
 
-.risk-factors__text--secondary {
-  color: rgb(82 82 91);
+.risk-factors__text--medium {
+  color: rgb(249 115 22);
+}
+
+.risk-factors__text--high {
+  color: rgb(220 38 38);
 }

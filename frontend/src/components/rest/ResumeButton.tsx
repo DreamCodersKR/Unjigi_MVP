@@ -1,12 +1,14 @@
 type ResumeButtonProps = {
   disabled?: boolean;
   isRecommended: boolean;
+  label: string;
   onClick: () => void;
 };
 
 export function ResumeButton({
   disabled = false,
   isRecommended,
+  label,
   onClick,
 }: ResumeButtonProps) {
   return (
@@ -22,11 +24,10 @@ export function ResumeButton({
         disabled={disabled}
         onClick={onClick}
       >
-        🚛운행 재개
+        {label}
       </button>
-
       <p className="rest-area-resume__hint">
-        30분 미만(MVP 20초 조정) 휴식 후 재개하면 경고가 표시됩니다.
+        30분 미만 휴식 후 재개하면 경고가 표시됩니다.
       </p>
     </section>
   );

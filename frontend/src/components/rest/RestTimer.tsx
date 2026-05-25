@@ -6,7 +6,7 @@ export function RestTimer({ elapsedText }: RestTimerProps) {
   return (
     <section className="rest-area-section rest-area-timer">
       <div className="rest-area-timer__label">
-        현재 휴식 시간
+        ⏱ 휴식 시간
       </div>
 
       <div className="rest-area-timer__value">
@@ -15,7 +15,7 @@ export function RestTimer({ elapsedText }: RestTimerProps) {
 
       <div className="rest-area-timer__meta">
         <p className="rest-area-timer__meta-text">
-          목표 휴식: 30분 이상(MVP 20초 조정)
+          목표 휴식: 30분 이상
         </p>
       </div>
     </section>

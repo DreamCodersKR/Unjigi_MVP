@@ -9,7 +9,7 @@ import { ResumeButton } from "@/components/rest/ResumeButton";
 import { ShortRestWarnModal } from "@/components/rest/ShortRestWarnModal";
 import "./RestArea.css";
 
-const MIN_REST_SECONDS = import.meta.env.DEV ? 20 : 30 * 60;
+const MIN_REST_SECONDS = 30 * 60;
 
 function formatElapsedTime(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60);
@@ -45,6 +45,12 @@ export default function RestArea() {
   );
 
   const canResumeWithoutWarning = elapsedSeconds >= MIN_REST_SECONDS;
+  const remainingRestMinutes = Math.ceil(
+    Math.max(MIN_REST_SECONDS - elapsedSeconds, 0) / 60,
+  );
+  const resumeButtonLabel = canResumeWithoutWarning
+    ? "🚛운행 재개"
+    : `✅${remainingRestMinutes}분 더 쉬세요`;
 
   const resumeTrip = () => {
     exitRestArea();
@@ -78,6 +84,7 @@ export default function RestArea() {
         <ResumeButton
           disabled={false}
           isRecommended={canResumeWithoutWarning}
+          label={resumeButtonLabel}
           onClick={handleResumeClick}
         />
 

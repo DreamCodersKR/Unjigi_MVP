@@ -102,9 +102,9 @@
 }
 
 .rest-area-resume__button--warning {
-  border-color: rgb(253 186 116);
-  background: rgb(255 247 237);
-  color: rgb(194 65 12);
+  border-color: rgb(161 161 170);
+  background: rgb(244 244 245);
+  color: rgb(82 82 91);
 }
 
 .rest-area-resume__hint {

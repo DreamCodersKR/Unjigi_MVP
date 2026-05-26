@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTripStore } from "@/stores/trip";
 import { ConfirmWindow } from "@/components/ConfirmWindow";
 import { Button as UIButton } from "@/components/ui/button";
+import { useTripStore } from "@/stores/trip";
 import "./RunEndButton.css";
 
 export function RunEndButton() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const endTrip = useTripStore((s) => s.endTrip);
+  const isAtRestArea = useTripStore((s) => s.isAtRestArea);
+  const exitRestArea = useTripStore((s) => s.exitRestArea);
 
   const handleConfirm = () => {
-    endTrip();
+    if (isAtRestArea) {
+      exitRestArea();
+    }
+
     setOpen(false);
 
     navigate("/", {

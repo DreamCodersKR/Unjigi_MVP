@@ -21,10 +21,16 @@ function formatElapsedTime(totalSeconds: number) {
 export default function RestArea() {
   const navigate = useNavigate();
   const isRunning = useTripStore((s) => s.isRunning);
+  const enterRestArea = useTripStore((s) => s.enterRestArea);
   const exitRestArea = useTripStore((s) => s.exitRestArea);
   const [restStartedAt] = useState(() => Date.now());
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [warnOpen, setWarnOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+    enterRestArea();
+  }, [enterRestArea, isRunning]);
 
   useEffect(() => {
     const updateElapsed = () => {

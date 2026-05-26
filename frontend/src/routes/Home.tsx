@@ -16,6 +16,7 @@ export default function Home() {
   const navigate = useNavigate();
   const location = useLocation();
   const isRunning = useTripStore(s => s.isRunning);
+  const endTrip = useTripStore(s => s.endTrip);
 
   useEffect(() => {
     dbping();
@@ -32,17 +33,10 @@ export default function Home() {
     }
   }, [location.state, navigate]);
 
-  useEffect(() => {
-    if (!summaryOpen) return;
-
-    const timer = window.setTimeout(() => {
-      setSummaryOpen(false);
-    }, 5000);
-
-    return () => {
-      window.clearTimeout(timer);
-    };
-  }, [summaryOpen]);
+  const handleTripSummaryClose = () => {
+    setSummaryOpen(false);
+    endTrip();
+  };
 
   return (
     <>
@@ -51,7 +45,7 @@ export default function Home() {
         <UnjigiCallButton />
         <TripSummary
           open={summaryOpen}
-          onClose={() => setSummaryOpen(false)}
+          onClose={handleTripSummaryClose}
         />
       </TabScreen>
       <BottomTabBar />

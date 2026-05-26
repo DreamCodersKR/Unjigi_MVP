@@ -49,6 +49,19 @@
   color: rgb(4 120 87);
 }
 
+.trip-summary__risk-trend {
+  padding-block: 0.75rem;
+}
+
+.trip-summary__risk-trend-title {
+  margin-bottom: 0.5rem;
+  color: rgb(107 114 128);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
 .trip-summary__notice-meta {
   margin-left: 0.25rem;
   color: rgb(107 114 128);

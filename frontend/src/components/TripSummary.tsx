@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
+import { RiskSparkline } from "@/components/RiskSparkline";
+import { getElapsedMinutes, useTripStore } from "@/stores/trip";
 import "./TripSummary.css";
+
+const ESTIMATED_AVERAGE_SPEED_KMH = 84;
 
 interface TripSummaryProps {
   open: boolean;
@@ -11,6 +15,21 @@ export default function TripSummary({
   onClose,
 }: TripSummaryProps) {
   const [remainingSeconds, setRemainingSeconds] = useState(5);
+  const tripStartedAt = useTripStore((s) => s.tripStartedAt);
+  const currentScore = useTripStore((s) => s.currentScore);
+  const riskHistory = useTripStore((s) => s.riskHistory);
+  const rests = useTripStore((s) => s.rests);
+
+  const elapsedMinutes = tripStartedAt ? getElapsedMinutes(tripStartedAt) : 0;
+  const elapsedHours = elapsedMinutes / 60;
+  const estimatedDistanceKm = Math.max(
+    Math.round(elapsedHours * ESTIMATED_AVERAGE_SPEED_KMH),
+    0
+  );
+  const totalRestMinutes = getTotalRestMinutes(rests);
+  const restCount = rests.length;
+  const averageRiskScore = getAverageRiskScore(riskHistory, currentScore);
+  const safetyScore = Math.max(Math.round(100 - averageRiskScore), 0);
 
   useEffect(() => {
     if (!open) {
@@ -24,6 +43,7 @@ export default function TripSummary({
       setRemainingSeconds((prev) => {
         if (prev <= 1) {
           window.clearInterval(interval);
+          window.setTimeout(onClose, 0);
           return 0;
         }
 
@@ -34,7 +54,7 @@ export default function TripSummary({
     return () => {
       window.clearInterval(interval);
     };
-  }, [open]);
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -51,36 +71,45 @@ export default function TripSummary({
           <SummaryRow
             icon="⏱"
             label="운행 시간"
-            value="5시간 32분"
+            value={formatElapsedMinutes(elapsedMinutes)}
           />
 
           <SummaryRow
             icon="🛣️"
-            label="운행 거리"
-            value="420 km"
+            label="운행 거리(예상)"
+            value={`${estimatedDistanceKm} km`}
           />
 
           <SummaryRow
-            icon="🚀"
-            label="평균 속도"
-            value="76 km/h"
+            icon="🚚"
+            label="평균 속도(예상)"
+            value={`${ESTIMATED_AVERAGE_SPEED_KMH} km/h`}
           />
 
           <SummaryRow
             icon="☕"
             label="휴식 시간"
-            value="45분 (2회)"
+            value={`${formatElapsedMinutes(totalRestMinutes)} (${restCount}회)`}
           />
 
           <SummaryRow
             icon="⭐"
             label="안전 점수"
-            value="82점"
+            value={`${safetyScore}점`}
             valueClassName="trip-summary-row__value--safe"
           />
 
+          {riskHistory.length > 0 ? (
+            <section className="trip-summary__risk-trend">
+              <h3 className="trip-summary__risk-trend-title">
+                위험도 추이
+              </h3>
+              <RiskSparkline data={riskHistory} height={56} />
+            </section>
+          ) : null}
+
           <div className="trip-summary__notice">
-            👨‍👩‍👧 가족 알림 발송 완료
+            👨‍👩‍👧가족 알림 발송 완료
             <span className="trip-summary__notice-meta">(mock)</span>
           </div>
         </div>
@@ -128,4 +157,48 @@ function SummaryRow({
       </span>
     </div>
   );
+}
+
+function formatElapsedMinutes(totalMinutes: number) {
+  if (totalMinutes < 1) return "1분 미만";
+
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  if (hours === 0) return `${minutes}분`;
+  if (minutes === 0) return `${hours}시간`;
+
+  return `${hours}시간 ${minutes}분`;
+}
+
+function getAverageRiskScore(
+  riskHistory: { score: number }[],
+  fallbackScore: number
+) {
+  if (riskHistory.length === 0) return fallbackScore;
+
+  const totalRiskScore = riskHistory.reduce(
+    (total, item) => total + item.score,
+    0
+  );
+
+  return totalRiskScore / riskHistory.length;
+}
+
+function getTotalRestMinutes(rests: {
+  restStartedAt: string;
+  restFinishedAt: string | null;
+}[]) {
+  return rests.reduce((totalMinutes, rest) => {
+    if (!rest.restFinishedAt) return totalMinutes;
+
+    const startedAt = new Date(rest.restStartedAt).getTime();
+    const finishedAt = new Date(rest.restFinishedAt).getTime();
+    const restMinutes = Math.max(
+      Math.floor((finishedAt - startedAt) / 60000),
+      0
+    );
+
+    return totalMinutes + restMinutes;
+  }, 0);
 }

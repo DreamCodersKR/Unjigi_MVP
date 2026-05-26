@@ -30,7 +30,7 @@ export default function Risk() {
 
   useEffect(() => {
     if (!data) return;
-    updateRisk(data.score, data.level);
+    updateRisk(data.score, data.level, data.history);
   }, [data, updateRisk]);
 
   useBackgroundEntryToast();

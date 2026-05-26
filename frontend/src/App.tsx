@@ -4,6 +4,7 @@ import Home from "./routes/Home";
 import Map from "./routes/Map";
 import Risk from "./routes/Risk";
 import Test from "./routes/Test";
+import TestTTS from "./routes/TestTTS";
 import RestArea from "./routes/RestArea";
 import StartTripModal from "./routes/StartTripModal";
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/risk" element={<Risk/>} />
         <Route path="/start-trip" element={<StartTripModal/>} />
         <Route path="/test" element={<Test/>} />
+        <Route path="/test-tts" element={<TestTTS/>} />
         <Route path="/rest-area" element={<RestArea/>} />
         <Route path="*" element={<div>페이지를 찾을 수 없습니다</div>} />
       </Routes>

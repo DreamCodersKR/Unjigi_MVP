@@ -1,0 +1,72 @@
+.unjigi-call {
+  width: 100%;
+}
+
+.unjigi-call__button {
+  --unjigi-call-level: 0%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid rgb(251 146 60);
+  border-radius: 0.5rem;
+  background: rgb(255 247 237);
+  padding: 0.875rem 1rem;
+  color: rgb(194 65 12);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.5rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.unjigi-call__button:hover {
+  background: rgb(255 237 213);
+}
+
+.unjigi-call__button:disabled {
+  cursor: wait;
+}
+
+.unjigi-call__button--busy {
+  border-color: rgb(249 115 22);
+  background: rgb(249 115 22);
+  color: white;
+}
+
+.unjigi-call__button--listening {
+  color: rgb(124 45 18);
+  background: linear-gradient(
+    to right,
+    rgb(249 115 22) 0 var(--unjigi-call-level),
+    rgb(255 237 213) var(--unjigi-call-level) 100%
+  );
+}
+
+.unjigi-call__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.unjigi-call__status,
+.unjigi-call__transcript,
+.unjigi-call__error {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+}
+
+.unjigi-call__status {
+  color: rgb(249 115 22);
+}
+
+.unjigi-call__transcript {
+  color: rgb(113 113 122);
+}
+
+.unjigi-call__error {
+  color: rgb(220 38 38);
+}

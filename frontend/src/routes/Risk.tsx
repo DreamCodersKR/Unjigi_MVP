@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { RunEndButton } from "@/components/RunEndButton";
 import { RiskFactors } from "@/components/RiskFactors";
 import { TabScreen } from "@/components/layout/TabScreen";
+import { UnjigiCallButton } from "@/components/voice/UnjigiCallButton";
 import { useBackgroundEntryToast } from "@/hooks/useBackgroundEntryToast";
 import { useProactiveCompanion } from "@/hooks/useProactiveCompanion";
 import { useRestAreaDetection } from "@/hooks/useRestAreaDetection";
@@ -78,6 +79,8 @@ export default function Risk() {
       </Button>
 
       <RiskFactors factors={data.factors} />
+
+      <UnjigiCallButton />
 
       <NearbyLoungeButton distance={12} />
     </TabScreen>

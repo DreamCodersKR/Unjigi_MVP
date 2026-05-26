@@ -5,7 +5,7 @@
 }
 
 .tab-screen--with-bottom-action {
-  padding-bottom: 11rem;
+  padding-bottom: 8rem;
 }
 
 .tab-screen__content {
@@ -20,9 +20,13 @@
 .tab-screen__bottom-action {
   position: fixed;
   inset-inline: 0;
-  bottom: 6rem;
+  bottom: 3rem;
   z-index: 40;
   padding-inline: 1rem;
+}
+
+.tab-screen__bottom-action--tabbar {
+  bottom: 6rem;
 }
 
 .tab-screen__bottom-action-inner {

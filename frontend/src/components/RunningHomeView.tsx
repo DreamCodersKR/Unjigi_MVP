@@ -25,7 +25,7 @@ export function RunningHomeView() {
           </span>
         </span>
       </Button>
-      <TabScreenBottomAction>
+      <TabScreenBottomAction offset="tabbar">
         <RunEndButton/>
       </TabScreenBottomAction>
     </>

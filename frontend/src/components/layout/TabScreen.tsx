@@ -9,6 +9,11 @@ type TabScreenProps = {
   contentClassName?: string;
 };
 
+type TabScreenBottomActionProps = {
+  children: ReactNode;
+  offset?: "page" | "tabbar";
+};
+
 type TabScreenContentProps = {
   children: ReactNode;
   className?: string;
@@ -46,9 +51,17 @@ export function TabScreenContent({ children, className }: TabScreenContentProps)
   );
 }
 
-export function TabScreenBottomAction({ children }: TabScreenProps) {
+export function TabScreenBottomAction({
+  children,
+  offset = "page",
+}: TabScreenBottomActionProps) {
   return (
-    <div className="tab-screen__bottom-action">
+    <div
+      className={cn(
+        "tab-screen__bottom-action",
+        offset === "tabbar" && "tab-screen__bottom-action--tabbar"
+      )}
+    >
       <div className="tab-screen__bottom-action-inner">{children}</div>
     </div>
   );

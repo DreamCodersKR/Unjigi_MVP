@@ -47,21 +47,14 @@ export default function Risk() {
 
   return (
     <TabScreen
+      className="risk-screen"
       contentClassName="risk-screen__content"
-      bottomAction={<RunEndButton />}
     >
-      <h1 className="risk-screen__title">운행 위험도</h1>
+      <div className="risk-screen__running-header">
+        🚚 운행 중 ({elapsedText})
+      </div>
 
-      <section className="risk-screen__summary-grid">
-        <div className="risk-screen__elapsed-card">
-          <div className="risk-screen__elapsed-label">
-            운행 시간
-          </div>
-          <div className="risk-screen__elapsed-value">
-            <p className="risk-screen__elapsed-text">{elapsedText}</p>
-          </div>
-        </div>
-
+      <section className="risk-screen__gauge-section">
         <RiskGauge score={data.score} level={data.level} compact />
       </section>
 
@@ -82,7 +75,13 @@ export default function Risk() {
 
       <UnjigiCallButton />
 
-      <NearbyLoungeButton distance={12} />
+      <div className="risk-screen__lounge-action">
+        <NearbyLoungeButton distance={12} />
+      </div>
+
+      <div className="risk-screen__end-action">
+        <RunEndButton />
+      </div>
     </TabScreen>
   );
 }

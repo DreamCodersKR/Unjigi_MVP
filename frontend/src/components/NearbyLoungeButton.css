@@ -3,9 +3,9 @@
   min-height: 2.5rem;
   width: 100%;
   border-radius: 0.5rem;
-  background: rgb(24 24 27);
+  background: rgb(219 234 254);
   padding: 0.75rem 1.25rem;
-  color: white;
+  color: rgb(37 99 235);
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.25rem;
@@ -13,7 +13,7 @@
 }
 
 .nearby-lounge-button:hover {
-  background: rgb(39 39 42);
+  background: rgb(191 219 254);
 }
 
 .nearby-lounge-button__icon {

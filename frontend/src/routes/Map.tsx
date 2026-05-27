@@ -18,7 +18,7 @@ export default function MapPage() {
   const { mapRef, map } = useNaverMap({ currentLoc });
 
   const [searchParams] = useSearchParams();
-  const { data: lounges = [], isLoading, error, refetch } = 
+  const { data: lounges = [], isLoading, error } = 
     searchParams.get('focus') === 'nearest' 
     ? useLoungeNearest(DEFAULT_Coord.lat, DEFAULT_Coord.lng) 
     : useLounges();
@@ -33,18 +33,18 @@ export default function MapPage() {
     {error && <div className="map-screen__status">라운지 에러 발생: {error.message}</div>}
 
     <Link
-      to="/"
+      to="/risk"
       className="map-screen__control map-screen__control--home"
     >
-      홈으로 돌아가기
+      돌아가기
     </Link>
     
-    <button
+    {/* <button
       onClick={() => refetch()}
       className="map-screen__control map-screen__control--refresh"
     >
       라운지 불러오기
-    </button>
+    </button> */}
 
     <div
       ref={mapRef}

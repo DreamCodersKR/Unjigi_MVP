@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import { History, Map, Settings, Users } from "lucide-react";
+import { toast } from "sonner";
 import "./BottomTabBar.css";
 
 const pendingMessage = "준비 중인 기능입니다";
 
 export function BottomTabBar() {
   const handlePendingClick = () => {
-    alert(pendingMessage);
+    toast.info(pendingMessage, {
+      duration: 3000,
+      position: "top-center",
+    });
   };
 
   return (
